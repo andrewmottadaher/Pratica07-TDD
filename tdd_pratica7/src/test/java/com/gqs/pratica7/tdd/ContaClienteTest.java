@@ -22,4 +22,12 @@ class ContaClienteTest {
         assertEquals(cliente, conta.getCliente());
         assertEquals(0.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void deveCriarContaInformandoApenasId() {
+        ContaCliente conta = new ContaCliente(3);
+        assertEquals(3, conta.getId());
+        assertNull(conta.getCliente());
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+    }
 }
