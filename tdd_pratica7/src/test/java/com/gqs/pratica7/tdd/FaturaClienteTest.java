@@ -30,4 +30,12 @@ class FaturaClienteTest {
         fatura.setCliente(novoCliente);
         assertEquals(novoCliente, fatura.getCliente());
     }
+
+    @Test
+    void deveAtualizarValorDaFatura() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        FaturaCliente fatura = new FaturaCliente(1, cliente, 100.0);
+        fatura.setValor(250.0);
+        assertEquals(250.0, fatura.getValor(), 0.001);
+    }
 }
