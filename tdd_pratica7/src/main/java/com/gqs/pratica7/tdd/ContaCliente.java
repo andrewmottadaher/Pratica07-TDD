@@ -23,4 +23,10 @@ public class ContaCliente {
     public double getSaldo() {
         return saldo;
     }
+
+    public ContaCliente(int id, Cliente cliente) {
+        this.id = id;
+        this.cliente = cliente;
+        this.saldo = 0.0;
+    }
 }
