@@ -35,4 +35,8 @@ public class FaturaCliente {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public double getValorComDesconto() {
+        return valor * (1 - cliente.getDesconto() / 100.0);
+    }
 }
