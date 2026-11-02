@@ -23,4 +23,8 @@ public class FaturaCliente {
     public double getValor() {
         return valor;
     }
+
+    public FaturaCliente(int id) {
+        this.id = id;
+    }
 }
