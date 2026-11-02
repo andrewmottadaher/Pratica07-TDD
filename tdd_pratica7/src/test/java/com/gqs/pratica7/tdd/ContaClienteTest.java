@@ -56,4 +56,13 @@ class ContaClienteTest {
                 "Andrew(1)(10%) saldo=R$500.50",
                 conta.toString());
     }
+
+    @Test
+    void deveAdicionarDepositoAoSaldoDaConta() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        double novoSaldo = conta.addDeposito(200.0);
+        assertEquals(700.0, novoSaldo, 0.001);
+        assertEquals(700.0, conta.getSaldo(), 0.001);
+    }
 }
