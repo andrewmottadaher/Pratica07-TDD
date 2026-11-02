@@ -38,4 +38,8 @@ public class ContaCliente {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
 }
