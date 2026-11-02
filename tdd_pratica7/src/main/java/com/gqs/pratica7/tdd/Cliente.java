@@ -36,4 +36,10 @@ public class Cliente {
     public void setDesconto(int desconto) {
         this.desconto = desconto;
     }
+
+    //O @Override indica que estou sobrescrevendo um método herdado de Object
+    @Override
+    public String toString() {
+        return nome + "(" + id + ")(" + desconto + "%)";
+    }
 }
