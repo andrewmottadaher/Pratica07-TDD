@@ -57,6 +57,8 @@ public class ContaCliente {
     public double subSaldo(double valor) {
         if (valor <= saldo) {
             saldo -= valor;
+        } else {
+            System.out.println("Saldo insuficiente para realizar o saque.");
         }
         return saldo;
     }
