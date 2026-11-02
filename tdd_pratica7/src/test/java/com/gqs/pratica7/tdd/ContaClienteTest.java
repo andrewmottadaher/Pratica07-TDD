@@ -47,4 +47,13 @@ class ContaClienteTest {
         conta.setSaldo(750.0);
         assertEquals(750.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void deveRetornarRepresentacaoTextualDaConta() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(5, cliente, 500.5);
+        assertEquals(
+                "Andrew(1)(10%) saldo=R$500.50",
+                conta.toString());
+    }
 }
