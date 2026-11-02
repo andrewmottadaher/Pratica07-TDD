@@ -25,21 +25,29 @@ public class Cliente {
         return nome;
     }
 
-    public int getDesconto() {
-        return desconto;
-    }
-
     public String getGenero() {
         return genero;
+    }
+
+    public int getDesconto() {
+        return desconto;
     }
 
     public void setDesconto(int desconto) {
         this.desconto = desconto;
     }
 
-    //O @Override indica que estou sobrescrevendo um método herdado de Object
+    // O @Override indica que estou sobrescrevendo um método herdado de Object
     @Override
     public String toString() {
         return nome + "(" + id + ")(" + desconto + "%)";
+    }
+
+    public void setGenero(String genero) {
+        if ("m".equals(genero) || "f".equals(genero) || "nd".equals(genero)) {
+            this.genero = genero;
+        } else {
+            throw new IllegalArgumentException("Genero invalido");
+        }
     }
 }
