@@ -32,4 +32,34 @@ class ClienteTest {
         Cliente cliente = new Cliente(1, "Andrew", 10);
         assertEquals("Andrew(1)(10%)", cliente.toString());
     }
+
+    @Test
+    void deveAtualizarGeneroParaMasculino() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        cliente.setGenero("m");
+        assertEquals("m", cliente.getGenero());
+    }
+
+    @Test
+    void deveAtualizarGeneroParaFeminino() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        cliente.setGenero("f");
+        assertEquals("f", cliente.getGenero());
+    }
+
+    @Test
+    void deveAtualizarGeneroParaNaoDefinido() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        cliente.setGenero("nd");
+        assertEquals("nd", cliente.getGenero());
+    }
+
+    @Test
+    void naoDeveAceitarGeneroInvalido() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> cliente.setGenero("x"));
+        assertEquals("nd", cliente.getGenero());
+    }
 }
