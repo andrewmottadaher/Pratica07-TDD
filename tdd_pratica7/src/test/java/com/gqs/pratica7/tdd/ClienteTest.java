@@ -26,4 +26,10 @@ class ClienteTest {
         cliente.setDesconto(20);
         assertEquals(20, cliente.getDesconto());
     }
+
+    @Test
+    void deveRetornarRepresentacaoTextualDoCliente() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertEquals("Andrew(1)(10%)", cliente.toString());
+    }
 }
