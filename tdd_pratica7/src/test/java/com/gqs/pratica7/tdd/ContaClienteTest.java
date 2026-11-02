@@ -39,4 +39,12 @@ class ContaClienteTest {
         conta.setCliente(novoCliente);
         assertEquals(novoCliente, conta.getCliente());
     }
+
+    @Test
+    void deveAtualizarSaldoDaConta() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        conta.setSaldo(750.0);
+        assertEquals(750.0, conta.getSaldo(), 0.001);
+    }
 }
