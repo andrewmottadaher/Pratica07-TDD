@@ -53,4 +53,11 @@ public class ContaCliente {
         saldo += valor;
         return saldo;
     }
+
+    public double subSaldo(double valor) {
+        if (valor <= saldo) {
+            saldo -= valor;
+        }
+        return saldo;
+    }
 }
