@@ -17,23 +17,23 @@ public class Cliente {
         this.genero = "nd";
     }
 
-    // Retorna o identificador do cliente
     public int getId() {
         return id;
     }
 
-    // Retorna o nome do cliente
     public String getNome() {
         return nome;
     }
 
-    // Retorna o percentual de desconto
     public int getDesconto() {
         return desconto;
     }
 
-    // Retorna o genero do cliente
     public String getGenero() {
         return genero;
+    }
+
+    public void setDesconto(int desconto) {
+        this.desconto = desconto;
     }
 }
