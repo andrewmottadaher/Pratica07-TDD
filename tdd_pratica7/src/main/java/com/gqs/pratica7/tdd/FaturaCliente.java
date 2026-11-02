@@ -39,4 +39,9 @@ public class FaturaCliente {
     public double getValorComDesconto() {
         return valor * (1 - cliente.getDesconto() / 100.0);
     }
+
+    @Override
+    public String toString() {
+        return "Fatura [id=" + id + ", cliente=" + cliente + ", valor=" + valor + " ]";
+    }
 }
