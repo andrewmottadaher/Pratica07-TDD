@@ -1,0 +1,95 @@
+package com.gqs.pratica7.tdd;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class ContaClienteTest {
+
+    @Test
+    void deveCriarContaComOsDadosInformados() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        assertEquals(1, conta.getId());
+        assertEquals(cliente, conta.getCliente());
+        assertEquals(500.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void deveCriarContaComIdECliente() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(2, cliente);
+        assertEquals(2, conta.getId());
+        assertEquals(cliente, conta.getCliente());
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void deveCriarContaInformandoApenasId() {
+        ContaCliente conta = new ContaCliente(3);
+        assertEquals(3, conta.getId());
+        assertNull(conta.getCliente());
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void deveAtualizarClienteDaConta() {
+        Cliente clienteInicial = new Cliente(1, "Andrew", 10);
+        Cliente novoCliente = new Cliente(2, "Maria", 15);
+        ContaCliente conta = new ContaCliente(1, clienteInicial, 500.0);
+        conta.setCliente(novoCliente);
+        assertEquals(novoCliente, conta.getCliente());
+    }
+
+    @Test
+    void deveAtualizarSaldoDaConta() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        conta.setSaldo(750.0);
+        assertEquals(750.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void deveRetornarRepresentacaoTextualDaConta() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(5, cliente, 500.5);
+        assertEquals(
+                "Andrew(1)(10%) saldo=R$500.50",
+                conta.toString());
+    }
+
+    @Test
+    void deveAdicionarDepositoAoSaldoDaConta() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        double novoSaldo = conta.addDeposito(200.0);
+        assertEquals(700.0, novoSaldo, 0.001);
+        assertEquals(700.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void deveSubtrairValorDoSaldoDaConta() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        double novoSaldo = conta.subSaldo(200.0);
+        assertEquals(300.0, novoSaldo, 0.001);
+        assertEquals(300.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDevePermitirSaqueSuperiorAoSaldo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        double saldoAtual = conta.subSaldo(600.0);
+        assertEquals(500.0, saldoAtual, 0.001);
+        assertEquals(500.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDevePermitirSaqueComValorNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 500.0);
+        double saldoAtual = conta.subSaldo(-100.0);
+        assertEquals(500.0, saldoAtual, 0.001);
+        assertEquals(500.0, conta.getSaldo(), 0.001);
+    }
+}
