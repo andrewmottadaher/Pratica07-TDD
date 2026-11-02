@@ -48,4 +48,9 @@ public class ContaCliente {
         return cliente + " saldo=R$" +
                 String.format(java.util.Locale.US, "%.2f", saldo);
     }
+
+    public double addDeposito(double valor) {
+        saldo += valor;
+        return saldo;
+    }
 }
