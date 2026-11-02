@@ -1,0 +1,6 @@
+# Arquivos e diretorios gerados pelo Maven
+**/target/
+
+# Configuracoes locais de IDE
+.idea/
+.vscode/
