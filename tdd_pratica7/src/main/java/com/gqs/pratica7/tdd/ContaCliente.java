@@ -42,4 +42,10 @@ public class ContaCliente {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+    @Override
+    public String toString() {
+        return cliente + " saldo=R$" +
+                String.format(java.util.Locale.US, "%.2f", saldo);
+    }
 }
