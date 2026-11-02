@@ -9,9 +9,14 @@ class ClienteTest {
     @Test
     void deveCriarClienteComOsDadosInformados() {
         Cliente cliente = new Cliente(1, "Andrew", 10);
-
         assertEquals(1, cliente.getId());
         assertEquals("Andrew", cliente.getNome());
         assertEquals(10, cliente.getDesconto());
+    }
+
+    @Test
+    void deveInicializarGeneroComoNaoDefinido() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertEquals("nd", cliente.getGenero());
     }
 }
