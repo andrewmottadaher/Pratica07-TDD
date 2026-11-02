@@ -14,6 +14,7 @@ public class Cliente {
         this.id = id;
         this.nome = nome;
         this.desconto = desconto;
+        this.genero = "nd";
     }
 
     // Retorna o identificador do cliente
@@ -29,5 +30,10 @@ public class Cliente {
     // Retorna o percentual de desconto
     public int getDesconto() {
         return desconto;
+    }
+
+    // Retorna o genero do cliente
+    public String getGenero() {
+        return genero;
     }
 }
