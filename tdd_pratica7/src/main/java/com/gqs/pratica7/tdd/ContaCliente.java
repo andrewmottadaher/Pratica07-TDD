@@ -29,4 +29,9 @@ public class ContaCliente {
         this.cliente = cliente;
         this.saldo = 0.0;
     }
+
+    public ContaCliente(int id) {
+        this.id = id;
+        this.saldo = 0.0;
+    }
 }
