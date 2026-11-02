@@ -34,4 +34,8 @@ public class ContaCliente {
         this.id = id;
         this.saldo = 0.0;
     }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }
