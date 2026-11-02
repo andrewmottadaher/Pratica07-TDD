@@ -31,4 +31,8 @@ public class FaturaCliente {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 }
