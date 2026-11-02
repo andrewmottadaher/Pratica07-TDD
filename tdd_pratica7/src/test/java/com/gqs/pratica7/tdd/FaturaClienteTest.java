@@ -38,4 +38,11 @@ class FaturaClienteTest {
         fatura.setValor(250.0);
         assertEquals(250.0, fatura.getValor(), 0.001);
     }
+
+    @Test
+    void deveCalcularValorDaFaturaComDesconto() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        FaturaCliente fatura = new FaturaCliente(1, cliente, 100.0);
+        assertEquals(90.0, fatura.getValorComDesconto(), 0.001);
+    }
 }
