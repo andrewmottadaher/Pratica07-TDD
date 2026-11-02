@@ -19,4 +19,11 @@ class ClienteTest {
         Cliente cliente = new Cliente(1, "Andrew", 10);
         assertEquals("nd", cliente.getGenero());
     }
+
+    @Test
+    void deveAtualizarDescontoDoCliente() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        cliente.setDesconto(20);
+        assertEquals(20, cliente.getDesconto());
+    }
 }
