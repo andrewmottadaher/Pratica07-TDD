@@ -47,6 +47,7 @@ public class ContaCliente {
     }
 
     public void setSaldo(double saldo) {
+        validarSaldo(saldo);
         this.saldo = saldo;
     }
 
