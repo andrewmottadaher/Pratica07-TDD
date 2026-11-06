@@ -14,9 +14,16 @@ public class Cliente {
         }
     }
 
+    private void validarDesconto(int desconto) {
+        if (desconto < 0 || desconto > 100) {
+            throw new IllegalArgumentException("Desconto invalido");
+        }
+    }
+
     // Construtor: recebe os dados iniciais do cliente
     public Cliente(int id, String nome, int desconto) {
         validarNome(nome);
+        validarDesconto(desconto);
         this.id = id;
         this.nome = nome;
         this.desconto = desconto;
@@ -45,6 +52,7 @@ public class Cliente {
     }
 
     public void setDesconto(int desconto) {
+        validarDesconto(desconto);
         this.desconto = desconto;
     }
 
