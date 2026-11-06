@@ -7,7 +7,7 @@ public class FaturaCliente {
     private double valor;
 
     private void validarValor(double valor) {
-        if (valor < 0) {
+        if (Double.isNaN(valor) || Double.isInfinite(valor) || valor < 0) {
             throw new IllegalArgumentException("Valor da fatura invalido");
         }
     }
