@@ -7,7 +7,7 @@ public class ContaCliente {
     private double saldo;
 
     private void validarSaldo(double saldo) {
-        if (saldo < 0) {
+        if (Double.isNaN(saldo) || Double.isInfinite(saldo) || saldo < 0) {
             throw new IllegalArgumentException("Saldo invalido");
         }
     }
