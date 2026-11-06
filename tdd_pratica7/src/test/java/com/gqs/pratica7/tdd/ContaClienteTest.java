@@ -231,4 +231,26 @@ class ContaClienteTest {
         assertEquals(100.0, novoSaldo, 0.001);
         assertEquals(100.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void deveCriarContaComClienteESaldoZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente);
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+        assertEquals(cliente, conta.getCliente());
+    }
+
+    @Test
+    void deveCriarContaApenasComIdESaldoZero() {
+        ContaCliente conta = new ContaCliente(1);
+        assertNull(conta.getCliente());
+    }
+
+    @Test
+    void naoDeveCriarContaComSaldoNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ContaCliente(1, cliente, Double.NaN));
+    }
 }
