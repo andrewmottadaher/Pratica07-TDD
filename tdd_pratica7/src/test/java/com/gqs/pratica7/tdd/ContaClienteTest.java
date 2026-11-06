@@ -253,4 +253,20 @@ class ContaClienteTest {
                 IllegalArgumentException.class,
                 () -> new ContaCliente(1, cliente, Double.NaN));
     }
+
+    @Test
+    void naoDeveCriarContaComSaldoInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ContaCliente(1, cliente, Double.POSITIVE_INFINITY));
+    }
+
+    @Test
+    void naoDeveCriarContaComSaldoInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ContaCliente(1, cliente, Double.NEGATIVE_INFINITY));
+    }
 }
