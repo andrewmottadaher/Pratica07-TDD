@@ -98,4 +98,11 @@ class ContaClienteTest {
         Cliente cliente = new Cliente(1, "Andrew", 10);
         assertThrows(IllegalArgumentException.class, () -> new ContaCliente(1, cliente, -100.0));
     }
+
+    @Test
+    void deveCriarContaComSaldoZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 0.0);
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+    }
 }
