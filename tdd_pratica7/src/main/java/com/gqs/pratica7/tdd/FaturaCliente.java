@@ -45,6 +45,10 @@ public class FaturaCliente {
     }
 
     public double getValorComDesconto() {
+        if (cliente == null) {
+            throw new IllegalStateException(
+                    "Fatura sem cliente associado");
+        }
         return valor * (1 - cliente.getDesconto() / 100.0);
     }
 
