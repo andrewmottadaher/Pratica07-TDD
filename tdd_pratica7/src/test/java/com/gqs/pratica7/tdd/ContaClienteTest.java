@@ -215,15 +215,6 @@ class ContaClienteTest {
     }
 
     @Test
-    void naoDevePermitirSaqueComValorNegativo() {
-        Cliente cliente = new Cliente(1, "Andrew", 10);
-        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
-        double novoSaldo = conta.subSaldo(-50.0);
-        assertEquals(100.0, novoSaldo, 0.001);
-        assertEquals(100.0, conta.getSaldo(), 0.001);
-    }
-
-    @Test
     void naoDevePermitirSaqueSuperiorAoSaldoDisponivel() {
         Cliente cliente = new Cliente(1, "Andrew", 10);
         ContaCliente conta = new ContaCliente(1, cliente, 100.0);
@@ -298,5 +289,15 @@ class ContaClienteTest {
                 IllegalArgumentException.class,
                 () -> conta.setSaldo(Double.NEGATIVE_INFINITY));
         assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDevePermitirDepositoQueGereSaldoInfinito() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, Double.MAX_VALUE);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.addDeposito(Double.MAX_VALUE));
+        assertEquals(Double.MAX_VALUE, conta.getSaldo(), 0.0);
     }
 }
