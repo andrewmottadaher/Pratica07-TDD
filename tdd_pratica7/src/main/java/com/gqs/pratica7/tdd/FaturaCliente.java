@@ -6,7 +6,14 @@ public class FaturaCliente {
     private Cliente cliente;
     private double valor;
 
+    private void validarValor(double valor) {
+        if (Double.isNaN(valor) || Double.isInfinite(valor) || valor < 0) {
+            throw new IllegalArgumentException("Valor da fatura invalido");
+        }
+    }
+
     public FaturaCliente(int id, Cliente cliente, double valor) {
+        validarValor(valor);
         this.id = id;
         this.cliente = cliente;
         this.valor = valor;
@@ -33,10 +40,15 @@ public class FaturaCliente {
     }
 
     public void setValor(double valor) {
+        validarValor(valor);
         this.valor = valor;
     }
 
     public double getValorComDesconto() {
+        if (cliente == null) {
+            throw new IllegalStateException(
+                    "Fatura sem cliente associado");
+        }
         return valor * (1 - cliente.getDesconto() / 100.0);
     }
 

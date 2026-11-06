@@ -54,4 +54,71 @@ class FaturaClienteTest {
                 "Fatura [id=1, cliente=Andrew(1)(10%), valor=100.0 ]",
                 fatura.toString());
     }
+
+    @Test
+    void naoDeveCriarFaturaComValorNegativo() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(
+                        1,
+                        new Cliente(1, "Andrew", 10),
+                        -100.0));
+    }
+
+    @Test
+    void deveCriarFaturaComValorZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        FaturaCliente fatura = new FaturaCliente(1, cliente, 0.0);
+        assertEquals(0.0, fatura.getValor(), 0.001);
+    }
+
+    @Test
+    void naoDeveAtualizarValorDaFaturaParaValorNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        FaturaCliente fatura = new FaturaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> fatura.setValor(-50.0));
+        assertEquals(100.0, fatura.getValor(), 0.001);
+    }
+
+    @Test
+    void naoDeveCalcularDescontoSemClienteAssociado() {
+        FaturaCliente fatura = new FaturaCliente(1);
+        assertThrows(
+                IllegalStateException.class,
+                () -> fatura.getValorComDesconto());
+    }
+
+    @Test
+    void deveAtualizarValorDaFaturaParaZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        FaturaCliente fatura = new FaturaCliente(1, cliente, 100.0);
+        fatura.setValor(0.0);
+        assertEquals(0.0, fatura.getValor(), 0.001);
+    }
+
+    @Test
+    void naoDeveCriarFaturaComValorNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(1, cliente, Double.NaN));
+    }
+
+    @Test
+    void naoDeveCriarFaturaComValorInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(1, cliente, Double.POSITIVE_INFINITY));
+    }
+
+    @Test
+    void naoDeveCriarFaturaComValorInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(1, cliente, Double.NEGATIVE_INFINITY));
+    }
 }
