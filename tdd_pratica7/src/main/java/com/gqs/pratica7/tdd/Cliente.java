@@ -1,4 +1,3 @@
-
 package com.gqs.pratica7.tdd;
 
 public class Cliente {
@@ -11,6 +10,9 @@ public class Cliente {
 
     // Construtor: recebe os dados iniciais do cliente
     public Cliente(int id, String nome, int desconto) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome invalido");
+        }
         this.id = id;
         this.nome = nome;
         this.desconto = desconto;
