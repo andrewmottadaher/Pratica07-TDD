@@ -175,4 +175,24 @@ class ContaClienteTest {
                 () -> conta.subSaldo(Double.NaN));
         assertEquals(100.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void naoDeveAceitarSaqueComInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.subSaldo(Double.POSITIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarSaqueComInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.subSaldo(Double.NEGATIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
 }
