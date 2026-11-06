@@ -68,4 +68,18 @@ class ClienteTest {
                 IllegalArgumentException.class,
                 () -> new Cliente(1, "", 10));
     }
+
+    @Test
+    void naoDeveCriarClienteComNomeCompostoPorEspacos() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Cliente(1, "   ", 10));
+    }
+
+    @Test
+    void naoDeveCriarClienteComNomeNulo() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Cliente(1, null, 10));
+    }
 }
