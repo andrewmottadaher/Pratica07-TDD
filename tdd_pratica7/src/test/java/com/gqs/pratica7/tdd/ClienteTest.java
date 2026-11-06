@@ -130,4 +130,16 @@ class ClienteTest {
                 IllegalArgumentException.class,
                 () -> new Cliente(1, "Andrew", 110));
     }
+
+    @Test
+    void deveCriarClienteComDescontoZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 0);
+        assertEquals(0, cliente.getDesconto());
+    }
+
+    @Test
+    void deveCriarClienteComDescontoDeCemPorCento() {
+        Cliente cliente = new Cliente(1, "Andrew", 100);
+        assertEquals(100, cliente.getDesconto());
+    }
 }
