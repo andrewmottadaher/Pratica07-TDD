@@ -71,4 +71,14 @@ class FaturaClienteTest {
         FaturaCliente fatura = new FaturaCliente(1, cliente, 0.0);
         assertEquals(0.0, fatura.getValor(), 0.001);
     }
+
+    @Test
+    void naoDeveAtualizarValorDaFaturaParaValorNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        FaturaCliente fatura = new FaturaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> fatura.setValor(-50.0));
+        assertEquals(100.0, fatura.getValor(), 0.001);
+    }
 }
