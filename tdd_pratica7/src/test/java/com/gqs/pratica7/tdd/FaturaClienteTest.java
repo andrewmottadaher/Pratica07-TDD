@@ -54,4 +54,14 @@ class FaturaClienteTest {
                 "Fatura [id=1, cliente=Andrew(1)(10%), valor=100.0 ]",
                 fatura.toString());
     }
+
+    @Test
+    void naoDeveCriarFaturaComValorNegativo() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(
+                        1,
+                        new Cliente(1, "Andrew", 10),
+                        -100.0));
+    }
 }
