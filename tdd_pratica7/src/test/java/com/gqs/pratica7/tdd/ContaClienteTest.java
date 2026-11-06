@@ -92,4 +92,10 @@ class ContaClienteTest {
         assertEquals(500.0, saldoAtual, 0.001);
         assertEquals(500.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void naoDeveCriarContaComSaldoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(IllegalArgumentException.class, () -> new ContaCliente(1, cliente, -100.0));
+    }
 }
