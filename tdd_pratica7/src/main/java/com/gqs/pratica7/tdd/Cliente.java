@@ -1,4 +1,3 @@
-
 package com.gqs.pratica7.tdd;
 
 public class Cliente {
@@ -9,12 +8,31 @@ public class Cliente {
     private int desconto;
     private String genero;
 
+    private void validarNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome invalido");
+        }
+    }
+
+    private void validarDesconto(int desconto) {
+        if (desconto < 0 || desconto > 100) {
+            throw new IllegalArgumentException("Desconto invalido");
+        }
+    }
+
     // Construtor: recebe os dados iniciais do cliente
     public Cliente(int id, String nome, int desconto) {
+        validarNome(nome);
+        validarDesconto(desconto);
         this.id = id;
         this.nome = nome;
         this.desconto = desconto;
         this.genero = "nd";
+    }
+
+    public void setNome(String nome) {
+        validarNome(nome);
+        this.nome = nome;
     }
 
     public int getId() {
@@ -34,6 +52,7 @@ public class Cliente {
     }
 
     public void setDesconto(int desconto) {
+        validarDesconto(desconto);
         this.desconto = desconto;
     }
 
