@@ -269,4 +269,14 @@ class ContaClienteTest {
                 IllegalArgumentException.class,
                 () -> new ContaCliente(1, cliente, Double.NEGATIVE_INFINITY));
     }
+
+    @Test
+    void naoDeveAtualizarSaldoParaNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.setSaldo(Double.NaN));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
 }
