@@ -6,7 +6,14 @@ public class ContaCliente {
     private Cliente cliente;
     private double saldo;
 
+    private void validarSaldo(double saldo) {
+        if (saldo < 0) {
+            throw new IllegalArgumentException("Saldo invalido");
+        }
+    }
+
     public ContaCliente(int id, Cliente cliente, double saldo) {
+        validarSaldo(saldo);
         this.id = id;
         this.cliente = cliente;
         this.saldo = saldo;
