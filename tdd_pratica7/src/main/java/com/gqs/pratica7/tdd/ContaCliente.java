@@ -58,7 +58,7 @@ public class ContaCliente {
     }
 
     public double addDeposito(double valor) {
-        if (valor <= 0) {
+        if (Double.isNaN(valor) || Double.isInfinite(valor) || valor <= 0) {
             throw new IllegalArgumentException("Valor do deposito invalido");
         }
         saldo += valor;
