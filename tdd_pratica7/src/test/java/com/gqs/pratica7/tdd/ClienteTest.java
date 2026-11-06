@@ -123,4 +123,11 @@ class ClienteTest {
                 IllegalArgumentException.class,
                 () -> new Cliente(1, "Andrew", -10));
     }
+
+    @Test
+    void naoDeveCriarClienteComDescontoSuperiorACem() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Cliente(1, "Andrew", 110));
+    }
 }
