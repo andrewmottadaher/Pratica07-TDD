@@ -142,4 +142,29 @@ class ClienteTest {
         Cliente cliente = new Cliente(1, "Andrew", 100);
         assertEquals(100, cliente.getDesconto());
     }
+
+    @Test
+    void naoDeveAtualizarDescontoParaValorNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> cliente.setDesconto(-10));
+        assertEquals(10, cliente.getDesconto());
+    }
+
+    @Test
+    void naoDeveAtualizarDescontoParaValorSuperiorACem() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> cliente.setDesconto(110));
+        assertEquals(10, cliente.getDesconto());
+    }
+
+    @Test
+    void deveAtualizarDescontoParaValorValido() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        cliente.setDesconto(50);
+        assertEquals(50, cliente.getDesconto());
+    }
 }
