@@ -61,7 +61,11 @@ public class ContaCliente {
         if (Double.isNaN(valor) || Double.isInfinite(valor) || valor <= 0) {
             throw new IllegalArgumentException("Valor do deposito invalido");
         }
-        saldo += valor;
+        double novoSaldo = saldo + valor;
+        if (Double.isInfinite(novoSaldo)) {
+            throw new IllegalArgumentException("Saldo resultante invalido");
+        }
+        saldo = novoSaldo;
         return saldo;
     }
 
