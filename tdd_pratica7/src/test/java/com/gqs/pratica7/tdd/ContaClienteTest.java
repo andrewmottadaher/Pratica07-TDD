@@ -204,4 +204,13 @@ class ContaClienteTest {
         assertEquals(0.0, novoSaldo, 0.001);
         assertEquals(0.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void naoDevePermitirSaqueComValorZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        double novoSaldo = conta.subSaldo(0.0);
+        assertEquals(100.0, novoSaldo, 0.001);
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
 }
