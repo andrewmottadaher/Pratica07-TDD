@@ -8,15 +8,24 @@ public class Cliente {
     private int desconto;
     private String genero;
 
-    // Construtor: recebe os dados iniciais do cliente
-    public Cliente(int id, String nome, int desconto) {
+    private void validarNome(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome invalido");
         }
+    }
+
+    // Construtor: recebe os dados iniciais do cliente
+    public Cliente(int id, String nome, int desconto) {
+        validarNome(nome);
         this.id = id;
         this.nome = nome;
         this.desconto = desconto;
         this.genero = "nd";
+    }
+
+    public void setNome(String nome) {
+        validarNome(nome);
+        this.nome = nome;
     }
 
     public int getId() {
