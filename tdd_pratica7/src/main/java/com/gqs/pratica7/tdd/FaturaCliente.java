@@ -6,7 +6,14 @@ public class FaturaCliente {
     private Cliente cliente;
     private double valor;
 
+    private void validarValor(double valor) {
+        if (valor < 0) {
+            throw new IllegalArgumentException("Valor da fatura invalido");
+        }
+    }
+
     public FaturaCliente(int id, Cliente cliente, double valor) {
+        validarValor(valor);
         this.id = id;
         this.cliente = cliente;
         this.valor = valor;
@@ -33,6 +40,7 @@ public class FaturaCliente {
     }
 
     public void setValor(double valor) {
+        validarValor(valor);
         this.valor = valor;
     }
 
