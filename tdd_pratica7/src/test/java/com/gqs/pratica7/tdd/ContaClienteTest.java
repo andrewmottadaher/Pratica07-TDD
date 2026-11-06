@@ -195,4 +195,13 @@ class ContaClienteTest {
                 () -> conta.subSaldo(Double.NEGATIVE_INFINITY));
         assertEquals(100.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void devePermitirSaqueDoSaldoTotal() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        double novoSaldo = conta.subSaldo(100.0);
+        assertEquals(0.0, novoSaldo, 0.001);
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+    }
 }
