@@ -64,4 +64,11 @@ class FaturaClienteTest {
                         new Cliente(1, "Andrew", 10),
                         -100.0));
     }
+
+    @Test
+    void deveCriarFaturaComValorZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        FaturaCliente fatura = new FaturaCliente(1, cliente, 0.0);
+        assertEquals(0.0, fatura.getValor(), 0.001);
+    }
 }
