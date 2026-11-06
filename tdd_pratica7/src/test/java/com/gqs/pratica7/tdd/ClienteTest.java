@@ -89,4 +89,31 @@ class ClienteTest {
         cliente.setNome("Carlos");
         assertEquals("Carlos", cliente.getNome());
     }
+
+    @Test
+    void naoDeveAtualizarNomeParaVazio() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> cliente.setNome(""));
+        assertEquals("Andrew", cliente.getNome());
+    }
+
+    @Test
+    void naoDeveAtualizarNomeParaEspacos() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> cliente.setNome("   "));
+        assertEquals("Andrew", cliente.getNome());
+    }
+
+    @Test
+    void naoDeveAtualizarNomeParaNulo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> cliente.setNome(null));
+        assertEquals("Andrew", cliente.getNome());
+    }
 }
