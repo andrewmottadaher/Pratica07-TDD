@@ -66,6 +66,9 @@ public class ContaCliente {
     }
 
     public double subSaldo(double valor) {
+        if (Double.isNaN(valor) || Double.isInfinite(valor)) {
+            throw new IllegalArgumentException("Valor do saque invalido");
+        }
         if (valor > 0 && valor <= saldo) {
             saldo -= valor;
         } else {
