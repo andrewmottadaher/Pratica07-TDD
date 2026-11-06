@@ -58,6 +58,9 @@ public class ContaCliente {
     }
 
     public double addDeposito(double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor do deposito invalido");
+        }
         saldo += valor;
         return saldo;
     }
