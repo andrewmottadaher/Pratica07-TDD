@@ -92,4 +92,212 @@ class ContaClienteTest {
         assertEquals(500.0, saldoAtual, 0.001);
         assertEquals(500.0, conta.getSaldo(), 0.001);
     }
+
+    @Test
+    void naoDeveCriarContaComSaldoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(IllegalArgumentException.class, () -> new ContaCliente(1, cliente, -100.0));
+    }
+
+    @Test
+    void deveCriarContaComSaldoZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 0.0);
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAtualizarSaldoParaValorNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.setSaldo(-50.0));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarDepositoComValorNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.addDeposito(-50.0));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarDepositoComValorZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.addDeposito(0.0));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarDepositoComValorNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.addDeposito(Double.NaN));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarDepositoComInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.addDeposito(Double.POSITIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarDepositoComInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.addDeposito(Double.NEGATIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarSaqueComValorNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.subSaldo(Double.NaN));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarSaqueComInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.subSaldo(Double.POSITIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAceitarSaqueComInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.subSaldo(Double.NEGATIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void devePermitirSaqueDoSaldoTotal() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        double novoSaldo = conta.subSaldo(100.0);
+        assertEquals(0.0, novoSaldo, 0.001);
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDevePermitirSaqueComValorZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        double novoSaldo = conta.subSaldo(0.0);
+        assertEquals(100.0, novoSaldo, 0.001);
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDevePermitirSaqueSuperiorAoSaldoDisponivel() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        double novoSaldo = conta.subSaldo(150.0);
+        assertEquals(100.0, novoSaldo, 0.001);
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void deveCriarContaComClienteESaldoZero() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente);
+        assertEquals(0.0, conta.getSaldo(), 0.001);
+        assertEquals(cliente, conta.getCliente());
+    }
+
+    @Test
+    void deveCriarContaApenasComIdESaldoZero() {
+        ContaCliente conta = new ContaCliente(1);
+        assertNull(conta.getCliente());
+    }
+
+    @Test
+    void naoDeveCriarContaComSaldoNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ContaCliente(1, cliente, Double.NaN));
+    }
+
+    @Test
+    void naoDeveCriarContaComSaldoInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ContaCliente(1, cliente, Double.POSITIVE_INFINITY));
+    }
+
+    @Test
+    void naoDeveCriarContaComSaldoInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ContaCliente(1, cliente, Double.NEGATIVE_INFINITY));
+    }
+
+    @Test
+    void naoDeveAtualizarSaldoParaNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.setSaldo(Double.NaN));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAtualizarSaldoParaInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.setSaldo(Double.POSITIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDeveAtualizarSaldoParaInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, 100.0);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.setSaldo(Double.NEGATIVE_INFINITY));
+        assertEquals(100.0, conta.getSaldo(), 0.001);
+    }
+
+    @Test
+    void naoDevePermitirDepositoQueGereSaldoInfinito() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        ContaCliente conta = new ContaCliente(1, cliente, Double.MAX_VALUE);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> conta.addDeposito(Double.MAX_VALUE));
+        assertEquals(Double.MAX_VALUE, conta.getSaldo(), 0.0);
+    }
 }

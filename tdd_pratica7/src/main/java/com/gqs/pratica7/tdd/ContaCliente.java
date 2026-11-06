@@ -6,7 +6,14 @@ public class ContaCliente {
     private Cliente cliente;
     private double saldo;
 
+    private void validarSaldo(double saldo) {
+        if (Double.isNaN(saldo) || Double.isInfinite(saldo) || saldo < 0) {
+            throw new IllegalArgumentException("Saldo invalido");
+        }
+    }
+
     public ContaCliente(int id, Cliente cliente, double saldo) {
+        validarSaldo(saldo);
         this.id = id;
         this.cliente = cliente;
         this.saldo = saldo;
@@ -40,6 +47,7 @@ public class ContaCliente {
     }
 
     public void setSaldo(double saldo) {
+        validarSaldo(saldo);
         this.saldo = saldo;
     }
 
@@ -50,11 +58,21 @@ public class ContaCliente {
     }
 
     public double addDeposito(double valor) {
-        saldo += valor;
+        if (Double.isNaN(valor) || Double.isInfinite(valor) || valor <= 0) {
+            throw new IllegalArgumentException("Valor do deposito invalido");
+        }
+        double novoSaldo = saldo + valor;
+        if (Double.isInfinite(novoSaldo)) {
+            throw new IllegalArgumentException("Saldo resultante invalido");
+        }
+        saldo = novoSaldo;
         return saldo;
     }
 
     public double subSaldo(double valor) {
+        if (Double.isNaN(valor) || Double.isInfinite(valor)) {
+            throw new IllegalArgumentException("Valor do saque invalido");
+        }
         if (valor > 0 && valor <= saldo) {
             saldo -= valor;
         } else {
