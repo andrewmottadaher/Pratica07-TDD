@@ -116,4 +116,11 @@ class ClienteTest {
                 () -> cliente.setNome(null));
         assertEquals("Andrew", cliente.getNome());
     }
+
+    @Test
+    void naoDeveCriarClienteComDescontoNegativo() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Cliente(1, "Andrew", -10));
+    }
 }
