@@ -97,4 +97,28 @@ class FaturaClienteTest {
         fatura.setValor(0.0);
         assertEquals(0.0, fatura.getValor(), 0.001);
     }
+
+    @Test
+    void naoDeveCriarFaturaComValorNaN() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(1, cliente, Double.NaN));
+    }
+
+    @Test
+    void naoDeveCriarFaturaComValorInfinitoPositivo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(1, cliente, Double.POSITIVE_INFINITY));
+    }
+
+    @Test
+    void naoDeveCriarFaturaComValorInfinitoNegativo() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new FaturaCliente(1, cliente, Double.NEGATIVE_INFINITY));
+    }
 }
