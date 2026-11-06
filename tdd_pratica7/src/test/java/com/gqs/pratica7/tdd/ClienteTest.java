@@ -82,4 +82,11 @@ class ClienteTest {
                 IllegalArgumentException.class,
                 () -> new Cliente(1, null, 10));
     }
+
+    @Test
+    void deveAtualizarNomeDoCliente() {
+        Cliente cliente = new Cliente(1, "Andrew", 10);
+        cliente.setNome("Carlos");
+        assertEquals("Carlos", cliente.getNome());
+    }
 }
