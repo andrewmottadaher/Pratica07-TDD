@@ -1,4 +1,3 @@
-
 package com.gqs.pratica7.tdd;
 
 import org.junit.jupiter.api.Test;
@@ -61,5 +60,12 @@ class ClienteTest {
                 IllegalArgumentException.class,
                 () -> cliente.setGenero("x"));
         assertEquals("nd", cliente.getGenero());
+    }
+
+    @Test
+    void naoDeveCriarClienteComNomeVazio() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new Cliente(1, "", 10));
     }
 }
